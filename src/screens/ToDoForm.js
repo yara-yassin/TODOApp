@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../Redux/slices/todoSlice";
 import styles from "../Styles/styles";
-export default function ToDoForm({ navigation }) {
+export default function ToDoForm() {
   const dispatch = useDispatch();
   const tasks = useSelector((state) => state.todo.todos);
   const [title, setTitle] = useState("");
