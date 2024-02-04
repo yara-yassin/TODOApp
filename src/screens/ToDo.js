@@ -14,7 +14,7 @@ import { complete, deleteTodo } from "../Redux/slices/todoSlice";
 import styles from "../Styles/styles";
 export default function TODO({ navigation }) {
   const dispatch = useDispatch();
-  
+
   const incompleteTodos = useSelector((state) =>
     state.todo.todos.filter((todo) => !todo.completed)
   );
