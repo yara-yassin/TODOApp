@@ -7,7 +7,8 @@ import Home from "../screens/Home";
 import CompletedTodosScreen from "../screens/CompletedTodosScreen";
 import ToDoDetails from "../screens/ToDoDetails";
 import { Ionicons } from "@expo/vector-icons";
-
+import TODO from "../screens/ToDo";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +49,17 @@ const Router = () => {
               <Ionicons name="home" color={color} size={size} />
             ),
             tabBarLabel: "Home",
+          }}
+        />
+        <Tab.Screen
+          name="TODO"
+          component={TODO}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="progress-clock" color={color} size={size} />
+            ),
+            tabBarLabel: "In Progress",
+            headerTitle: "In Progress TODOs",
           }}
         />
         <Tab.Screen

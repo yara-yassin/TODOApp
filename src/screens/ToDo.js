@@ -1,35 +1,38 @@
+//ToDo
 import React from "react";
-import { Text, View, FlatList, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import { useWindowDimensions } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteTodo, complete } from "../Redux/slices/todoSlice";
+import { complete, deleteTodo } from "../Redux/slices/todoSlice";
 import styles from "../Styles/styles";
-import ToDoForm from "./ToDoForm";
-export default function Home({ navigation }) {
+export default function TODO({ navigation }) {
   const dispatch = useDispatch();
-  const tasks = useSelector((state) => state.todo.todos);
-
-  const deleteTask = (taskId) => {
-    dispatch(deleteTodo(taskId));
-  };
-
-  const checkComplete = (taskId) => {
-    dispatch(complete(taskId));
-  };
-
+  
+  const incompleteTodos = useSelector((state) =>
+    state.todo.todos.filter((todo) => !todo.completed)
+  );
   const { width } = useWindowDimensions();
 
+  const handleDelete = (todoId) => {
+    dispatch(deleteTodo(todoId));
+  };
+
+  const handlecomplete = (todoId) => {
+    dispatch(complete(todoId));
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>TODO App</Text>
-
-      <ToDoForm />
-
+    <View style={styles.container}>
       <FlatList
         style={styles.taskList}
-        data={tasks}
+        data={incompleteTodos}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <View style={styles.taskItem}>
@@ -45,13 +48,13 @@ export default function Home({ navigation }) {
               <Text>{item.description}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => deleteTask(item.id)}>
+            <TouchableOpacity onPress={() => handleDelete(item.id)}>
               <Ionicons name="trash-bin" size={24} color="#791dc9" />
             </TouchableOpacity>
 
             <TouchableOpacity
               style={{ paddingLeft: width * 0.05 }}
-              onPress={() => checkComplete(item.id)}
+              onPress={() => handlecomplete(item.id)}
             >
               <Ionicons
                 name={item.completed ? "checkbox" : "square-outline"}
@@ -62,6 +65,6 @@ export default function Home({ navigation }) {
           </View>
         )}
       />
-    </SafeAreaView>
+    </View>
   );
 }
