@@ -11,7 +11,6 @@ import ToDoForm from "./ToDoForm";
 export default function Home({ navigation }) {
   const dispatch = useDispatch();
 
-  const tasks = useSelector((state) => state.todo.todos);
 
   const deleteTask = (taskId) => {
     dispatch(deleteTodo(taskId));
@@ -24,8 +23,7 @@ export default function Home({ navigation }) {
 
   const { width } = useWindowDimensions();
 
-  // Combine both todos and completedTodos
-  const allTodos = [...todos, ...completedTodos];
+  const tasks = useSelector((state) => state.todo.todos);
 
   return (
     <SafeAreaView style={styles.container}>
