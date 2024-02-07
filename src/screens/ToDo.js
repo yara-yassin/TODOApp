@@ -1,20 +1,13 @@
-//ToDo
 import React from "react";
-import {
-  Text,
-  View,
-  FlatList,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { Text, View, FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useWindowDimensions } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import { complete, deleteTodo } from "../Redux/slices/todoSlice";
 import styles from "../Styles/styles";
+
 export default function TODO({ navigation }) {
   const dispatch = useDispatch();
-
   const incompleteTodos = useSelector((state) =>
     state.todo.todos.filter((todo) => !todo.completed)
   );

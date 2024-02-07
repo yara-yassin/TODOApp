@@ -7,8 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteTodo, complete } from "../Redux/slices/todoSlice";
 import styles from "../Styles/styles";
 import ToDoForm from "./ToDoForm";
+
 export default function Home({ navigation }) {
   const dispatch = useDispatch();
+
   const tasks = useSelector((state) => state.todo.todos);
 
   const deleteTask = (taskId) => {
@@ -18,8 +20,12 @@ export default function Home({ navigation }) {
   const checkComplete = (taskId) => {
     dispatch(complete(taskId));
   };
+  
 
   const { width } = useWindowDimensions();
+
+  // Combine both todos and completedTodos
+  const allTodos = [...todos, ...completedTodos];
 
   return (
     <SafeAreaView style={styles.container}>

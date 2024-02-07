@@ -5,12 +5,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { useWindowDimensions } from "react-native";
 import { complete, deleteTodo } from "../Redux/slices/todoSlice";
 import styles from "../Styles/styles";
-const CompletedTodosScreen = ({ navigation }) => {
+
+export default function CompletedTodosScreen({ navigation }) {
   const dispatch = useDispatch();
-  
+
   const completedTodos = useSelector((state) =>
-    state.todo.todos.filter((todo) => todo.completed)
-  );
+  state.todo.todos.filter((todo) => todo.completed)
+);
+
   const { height, width } = useWindowDimensions();
 
   const handleDelete = (todoId) => {
@@ -60,6 +62,4 @@ const CompletedTodosScreen = ({ navigation }) => {
       />
     </View>
   );
-};
-
-export default CompletedTodosScreen;
+}
